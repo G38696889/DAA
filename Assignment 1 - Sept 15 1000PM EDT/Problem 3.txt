@@ -1,0 +1,69 @@
+// driver code start
+//GetNodeDetails is the function written just to call the
+//NodeDeterminer procedure.
+func GetNodeDetails(Tree T)
+{
+	nodePtr p;
+	p = T;
+	int positiveNodes = 0,negativeNodes = 0, zeroNodes = 0;
+	NodeDeterminer(T, positiveNodes,negativeNodes,zeroNodes)
+}
+//driver code end
+
+//Actual procedure starts
+procedure NodeDeterminer(Tree T, output positiveNodes,negativeNodes,zeroNodes)
+begin
+	nodePtr p;
+	p = T;
+	while(p != null)
+	begin	 	
+		if(p.key == 0)
+			zeroNodes++;
+		else if(p.key >= 1)
+			positiveNodes++;
+		else
+			negativeNodes++;
+		end if
+		NodeDeterminer(p.Right);
+		NodeDeterminer(p.Left);
+	end while
+end
+
+
+
+func DetermineIfBinaryTreeIsComplete(Tree T)
+begin
+	nodePtr p ;
+	p = T;
+	if(p==null)
+		return false;
+	Queue q = new Queue();
+	int popCounter = 0,height = 0;
+	q.Enqueue(p);
+	while(!q.IsNotEmpty())
+	begin
+		nodePtr temp = q.Dequeue();
+		int subTreeHeight  =0;
+		popCounter++;
+		if(temp.Right!== null && temp.Left!==null)
+			q.Enqueue(temp.Right);
+			q.Enqueue(temp.Left);
+		else if(temp.Right == null && temp.Left == null)
+			if(height == 0)
+				height = GetHeightFromPoppedValues(popCounter);
+				subTreeHeight = height;
+			else if(height ! = subTreeHeight)
+				return false;
+			end if
+		end if
+	end while
+	if(height == GetHeightFromPoppedValues(popCounter))
+		return true;
+	end if
+	return false;
+end
+
+func GetHeightFromPoppedValues(popCounter)
+begin
+	return 1+ max(popCounter/2, popCounter+1 /2);
+end
