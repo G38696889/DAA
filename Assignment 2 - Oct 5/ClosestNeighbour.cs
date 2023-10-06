@@ -1,17 +1,21 @@
+/*
+Try copy pasting this whole code in https://try.dot.net/
+*/
+
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
-
-namespace Programs.DivideAndConquer
+public class Program
 {
-    public class CloseNeighbour
-    {
-        public static int leftMinNeighbour = 10000000, rightMinNeighbour = 10000000;
+   public static int leftMinNeighbour = 10000000, rightMinNeighbour = 10000000;
         public static int[] arr = new int[12] { 3, 5, 4, 2, 6, 3, 0, 0, 5, 4, 8, 3 };
         public static int globalMax = -1;
         public static int globalMin = 1000000;
-        public static void Main(String []args)
-        {
-          CloseNeighbour cn = new CloseNeighbour();
+  public static void Main()
+  {
+    
+          Program cn = new Program();
           cn.CalcCloseNeighbour(0, 11);
             if (leftMinNeighbour < rightMinNeighbour)
                 Console.WriteLine(leftMinNeighbour);
@@ -20,9 +24,10 @@ namespace Programs.DivideAndConquer
 
             Console.WriteLine("Global Max" + globalMax);
             Console.WriteLine("Global Min" + globalMin);
-        }
+        
+  }
 
-        public void CalcCloseNeighbour(int start, int end)
+   public void CalcCloseNeighbour(int start, int end)
         {
             if (start == end || end<start || start>end)
                 return;
@@ -45,6 +50,4 @@ namespace Programs.DivideAndConquer
             CalcCloseNeighbour(mid + 1, end);
             return;
         }
-
-    }
 }
